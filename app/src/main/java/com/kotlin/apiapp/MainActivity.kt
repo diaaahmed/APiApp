@@ -3,22 +3,26 @@ package com.kotlin.apiapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.kotlin.apiapp.adapter.ProductAdapter
+import com.kotlin.apiapp.click.Click
+import com.kotlin.apiapp.common.Common
 import com.kotlin.apiapp.databinding.ActivityMainBinding
+import com.kotlin.apiapp.model.ProductItem
 import com.kotlin.apiapp.viewModel.MainViewModel
 import com.kotlin.apiapp.viewModel.MainViewModelFactory
 import javax.inject.Inject
 
 private const val TAG = "MainActivity"
 
-class MainActivity : AppCompatActivity()
+class MainActivity : AppCompatActivity(),Click
 {
     lateinit var mainViewModel: MainViewModel
 
     private val adapter by lazy  {
-        ProductAdapter(this)
+        ProductAdapter(this,this)
     }
 
     private val ui by lazy{
@@ -46,5 +50,10 @@ class MainActivity : AppCompatActivity()
             ui.productsRecyclerview.adapter = adapter
         })
 
+    }
+
+    override fun click(product: ProductItem)
+    {
+        Common.showMessage(this,"Product title it ${product.title}")
     }
 }

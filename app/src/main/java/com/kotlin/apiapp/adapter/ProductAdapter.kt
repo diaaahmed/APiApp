@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kotlin.apiapp.R
+import com.kotlin.apiapp.click.Click
 import com.kotlin.apiapp.databinding.ProductItemBinding
 import com.kotlin.apiapp.model.ProductItem
 
 
-class ProductAdapter(var context: Context): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(var context: Context, var click:Click): RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     private var productList = mutableListOf<ProductItem>()
 
@@ -27,9 +28,9 @@ class ProductAdapter(var context: Context): RecyclerView.Adapter<ProductAdapter.
                 .placeholder(R.drawable.logo)
                 .into(productImage)
 
-//            productItemBinding.root.setOnClickListener {
-//                click.onClick(product[i])
-//            }
+            productItemBinding.root.setOnClickListener {
+                click.click(product[i])
+            }
 
         }
 
